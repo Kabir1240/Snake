@@ -48,12 +48,20 @@ class Snake:
         new_turtle.goto(position)
         self.segments.append(new_turtle)
 
-    def reset(self):
+    def reset(self) -> None:
+        """
+        removes previous snake and sends it off-screen. Then creates a new snake to take its place
+        :return: None
+        """
         self.remove_snake()
         self.create_snake()
         self.head = self.segments[0]
 
     def remove_snake(self):
+        """
+        removes previous snake and sends it off-screen
+        :return:
+        """
         for segment in self.segments:
             segment.goto(1000, 1000)
         self.segments.clear()

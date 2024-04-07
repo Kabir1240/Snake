@@ -30,7 +30,12 @@ screen.onkey(key="Left", fun=snake.left)
 screen.onkey(key="Right", fun=snake.right)
 
 
-def user_prompt():
+def user_prompt() -> bool:
+    """
+    Allows user to decide if they want to continue the game or not using a prompt display via turtle graphics
+    :return:
+    """
+
     responses = ["continue", "c", "quit", "q"]
     prompt_response = screen.textinput(title="Quit?", prompt="Enter 'continue' to keep playing or 'quit' to exit")
     while prompt_response.lower() not in responses:
@@ -71,6 +76,7 @@ while not collision_occurred:
             collision_occurred = True
             user_continue_game = not user_prompt()
 
+    # if a collision has occurred, the game will either restart or end depending on the user input
     if collision_occurred:
         if user_continue_game:
             snake.reset()
