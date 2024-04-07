@@ -71,7 +71,7 @@ while not collision_occurred:
 
     # detect collision with tail
     for segment in snake.segments[1:]:
-        if snake.head.distance(segment) < 10:
+        if snake.head.distance(segment) < 3:
             score.game_over()
             collision_occurred = True
             user_continue_game = not user_prompt()
