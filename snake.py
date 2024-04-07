@@ -48,6 +48,16 @@ class Snake:
         new_turtle.goto(position)
         self.segments.append(new_turtle)
 
+    def reset(self):
+        self.remove_snake()
+        self.create_snake()
+        self.head = self.segments[0]
+
+    def remove_snake(self):
+        for segment in self.segments:
+            segment.goto(1000, 1000)
+        self.segments.clear()
+
     def move(self) -> None:
         """
         Moves the snake forward

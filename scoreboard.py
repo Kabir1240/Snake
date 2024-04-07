@@ -1,4 +1,4 @@
-from turtle import Turtle
+from turtle import Turtle, Screen
 ALIGNMENT = 'center'
 FONT = ('Courier', 15, 'normal')
 
@@ -13,6 +13,10 @@ class Scoreboard(Turtle):
         """
         super().__init__()
         self.score = 0
+
+        with open("data.txt", mode='r') as file:
+            self.highscore = int(file.read())
+
         self.color("white")
         self.hideturtle()
         self.penup()
@@ -25,7 +29,7 @@ class Scoreboard(Turtle):
         :return: None
         """
         self.clear()
-        self.write(f"Score: {self.score}", move=False, align=ALIGNMENT, font=FONT)
+        self.write(f"Score: {self.score} Highscore: {self.highscore}", move=False, align=ALIGNMENT, font=FONT)
 
     def increase_score(self) -> None:
         """
@@ -45,3 +49,14 @@ class Scoreboard(Turtle):
         self.write("GAME OVER", move=False, align=ALIGNMENT, font=FONT)
         self.goto(0, -20)
         self.write(f"Score: {self.score}", move=False, align=ALIGNMENT, font=FONT)
+
+    def reset_score(self):
+        self.goto(0, 275)
+        if self.score > self.highscore:
+            self.highscore = self.score
+
+            with open("data.txt", mode='w') as file:
+                file.write(str(self.highscore))
+
+        self.score = 0
+        self.update()
